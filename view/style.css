@@ -1,0 +1,44 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+
+.volta{
+    margin-left: 900px;
+    font-family: 'Coda Caption', sans-serif;
+}
+
+.circulo{
+    border-radius: 100px;
+    height: 150px;
+    width: 150px;
+    padding-left: 40px;
+    padding-top: 30px;
+    position: relative;
+    top: 70px;
+    z-index: 999;
+
+}
+
+.azul-pmc{
+    background-color: #003e72;
+}
+
+.card-login{
+    max-width: 650px;
+}
+/*Parte de visualização dos host*/
+.escolas{
+    text-decoration: none;
+    color: #003e72;
+    font-family: 'Coda Caption', sans-serif;
+}
+
+.btnt{
+    outline: none;
+    font-family: 'Coda Caption', sans-serif;
+}
+
+.parabaixo{
+    margin-top: 150px;
+}
