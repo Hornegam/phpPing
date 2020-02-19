@@ -18,13 +18,15 @@
 <body>
 <div id="loader" class="loader"></div>
 
-    <nav class="navbar navbar-light" style="background-color: #6495ED;">
+<nav class="navbar navbar-light" style="background-color: #1e6cc7;">
         <a class="nav-brand" href="http://informaticaeducativa.caraguatatuba.sp.gov.br">
-            <img class="mr-1" src="ie_dark.png"  height="55">     
+            <img class="mr-1" src="http://informaticaeducativa.caraguatatuba.sp.gov.br/img/ie_dark.png"  height="55">     
         </a>
-        <span style="font-size: 20px; color: black;">
-            <button type="button" class="btn btn-primary">Sair</button>
-        </span>
+        <div>
+            <a href="pingUnique.php" style="color: white;" class="pr-3 fas fa-hands-helping btn btn-warning"><strong></strong></a>
+            <a href="Log.html"><button class="btn btn-primary fas fa-sign-out-alt"></button></a>
+        </div>
+</div>
         
     </nav>
     
@@ -36,7 +38,7 @@
     <li class="breadcrumb-item active" aria-current="page">Ping</li>
   </ol>
 </nav>
-    <div class="card" style="background-color: #6495ED;">
+    <div class="card" style="background-color: #1e6cc7;">
         <div class="card-header">
           <div class="row">
               <div class="col-md-6 text-center">
@@ -54,8 +56,17 @@
     
     <?php 
         include '../controller/functions.php';
-
-        $ip = $_GET['ip'];
+        $ip = $_GET['ip'] ;
+      /*  if($_GET['ip'] == null){
+            if($_POST == null){
+                echo "Recarregue a página !";
+            }else{
+                $ip = $_POST['ip']; 
+            }
+        }else{
+            $ip = $_GET['ip'];
+        }
+        */
         echo '<div class="row">
         <div class="col-md-6 pl-4 text-center pt-4">
            <strong> '.$ip.'</strong>
@@ -71,7 +82,7 @@
     
 
 <footer class=" text-center  mt-5" >
-    <img class="d-block mx-auto mb-3" src="ie_dark.png" height="60px" alt="" >
+    <img class="d-block mx-auto mb-3" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSmTboEpL_YzVmlu3mwroanSRMvu5nOJb4mE89FSt4uPCR6HmB4" height="60px" alt="" >
     <b class="text-blue-pmc">Secretaria da Educação - Informática Educativa</b> <br>
 </footer>
 </div>

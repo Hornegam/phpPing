@@ -16,7 +16,6 @@
 </head>
 <body>
     <div id="loader" class="loader"></div>
-    <div style="display:none" id="tudo_page">
     <nav class="navbar navbar-light" style="background-color: #1e6cc7;">
         <a class="nav-brand" href="http://informaticaeducativa.caraguatatuba.sp.gov.br">
             <img class="mr-1" src="ie_dark.png"  height="55">     
@@ -33,56 +32,74 @@
     </div>
                 
     <div class="container pt-2" style="width: 80%; padding-bottom: 20px;">
-    <div class="card" style="background-color: #1e6cc7;">
+    <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="../pgn.php">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Ping</li>
+  </ol>
+</nav>
+    <div class="card" style="background-color: #ffffff;">
         <div class="card-header">
           <div class="row">
-              <div class="col-sm-8">
-                  <strong>Escolas</strong>
+                <div class="col-md-12 d-inline-flex"> 
+                    <div class="col-md-3 d-flex pr-4">  
+                        <strong>Digite o número do IP :</strong>
+                    </div>
+                    <div class="col-md-9 d-inline-flex">
+                        
+                            <input type="text" class="form-control" id="ip" placeholder="Digite o IP para dar Ping" aria-label="Digite o IP para dar Ping." aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                           <button class="btn btn-outline-primary" onclick="showDiv()" type="submit">Ping</button>
+                       
+                    </div>
+                </div>
               </div>
-              <div class="col">
-                <strong>Status</strong>
-              </div>
+          </div>
+          
+          </div>
+          <div id="welcomeDiv"  style="display:none;" class="card-body" >
+          <?php 
+          include '../controller/functions.php';
+          pingUnique();
+          ?>
           </div>
           <!--1º-->
         </div>
     </div>
     <br>
-    <div class="card cor">
-    <br>
-    <?php 
-          include '../controller/functions.php';
-          
-          $escolas = getSchool();
+    <div id="ping" class="card-body">
 
-          //Para pegar os nomes da escolas
-          while($row = $escolas->fetch_assoc()) {
-            echo  '<div class="row">
-            <div class="col-sm-8 pl-5">
-                <a href="ping.php/?school='.$row["Escola"].'" class="escolas"><strong> '.$row["Escola"].'</strong></a>
-            </div>
-            <div class="col">
-                <button type="submit" class="btn btn-success">BOM</button>
-            </div>
-            </div>';
-
-            echo "<hr>";
-          };
-
-          ?>
-        </div>
-</div>
-    
+    </div>
 
 <footer class=" text-center  mt-5" >
     <img class="d-block mx-auto mb-3" src="ie_dark.png" height="60px" alt="" >
     <b class="text-blue-pmc">Secretaria da Educação - Informática Educativa</b> <br>
 </footer>
 </div>
-</div>
-<script type="text/javascript">
-        // Este evendo é acionado após o carregamento da página
-        jQuery(window).load(function () {
-      $(".loader").delay(1500).fadeOut("slow"); //retire o delay quando for copiar!
+    <script>
+    
+    var vendaMediaMensal = $("#ip");
+        vendaMediaMensal.focusout( function(){
+        //alert(vendaMediaMensal.val());
+        $.get("pingip.php/", { ip : vendaMediaMensal.val()});
+                                
+        
+  
+  /*
+       $.ajax({
+            method: "POST",
+            url: "pingip.php",
+            data: {ip: vendaMediaMensal.val()}
+        });*/
+        window.location.href="pingip.php/?ip="+vendaMediaMensal.val();
+        //document.getElementById('welcomeDiv').style.display = "block";
+});
+    
+    </script>
+    
+    <script> 
+     jQuery(window).load(function () {
+      $("#loader").delay(1500).fadeOut("slow"); //retire o delay quando for copiar!
     $("#tudo_page").toggle("fast");
 });
 </script>

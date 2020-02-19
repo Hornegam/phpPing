@@ -2,7 +2,7 @@
 require 'conecta.inc';
 
 global $csv ;
-$csv = array_map('str_getcsv', file('nomeIp.csv'));
+//$csv = array_map('str_getcsv', file('nomeIp.csv'));
 
 function parseSchool($nombre){
     $piece = explode(";",$nombre);

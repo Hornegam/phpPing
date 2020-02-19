@@ -7,6 +7,10 @@
     margin-left: 900px;
     font-family: 'Coda Caption', sans-serif;
 }
+.cor{
+    background-color: #1e6cc7;
+    color: white;
+}
 
 .circulo{
     border-radius: 100px;
@@ -27,7 +31,7 @@
     width: 100%;
     height: 100%;
     z-index: 9999;
-    background: url('/book.gif') 50% 50% no-repeat #1e6cc7;
+    background: url('https://i2.wp.com/codemyui.com/wp-content/uploads/2015/11/pure-css-bookshelf-loading-animation.gif?fit=880%2C440&ssl=1') 50% 50% no-repeat #1e6cc7;
 }
 
 .azul-pmc{

@@ -1,8 +1,8 @@
 <?php
 include '../model/conecta.inc';
 function pingAddress($ip) {
-    //$pingresult = exec("ping -n 2 -w 2 $ip", $outcome, $status);
-   $status = false;
+    $pingresult = exec("ping -n 2 -w 2 $ip", $outcome, $status);
+   //$status = true;
     if (0 == $status) {
         //$status = " está funcionando";
         //echo "O roteador com IP : $ip da escola $nome".$status;
@@ -13,6 +13,26 @@ function pingAddress($ip) {
         return false;
     }
     
+}
+
+//if($_POST['action'] == 'call_this') {
+  //  echo '<strong>Teste</strong>';
+//}
+
+function pingUnique(){
+    $ip = $_POST['ip'];
+    if(pingAddress($ip)==true){
+        echo '<div class="text-center">
+        <strong>O ip '.$ip.' está funcionando</strong>
+        </div>
+        ';
+    }else{
+        echo '<div class="text-center">
+        <strong>O ip '.$ip.' não está funcionando</strong>
+        </div>
+        ';
+    }
+
 }
 
 function pingS3wachool($array){
