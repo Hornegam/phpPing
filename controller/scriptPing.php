@@ -1,40 +1,45 @@
 <?php
-include 'functions.php';
+include '../model/conecta.inc';
 
-function findIp(){
-    global $conexao;
-    $sql = "select * from ip";
-    return $escolas = $conexao->query($sql);
+function socketServer($ip){
+$conectado = @ fsockopen($ip.':88', 135, $numeroDoErro, $stringDoErro, 5); // Este último é o timeout, em segundos
+
+if ($conectado) {
+    print 'A máquina está online! :)';
+    return true;
+  } else {
+    print 'A máquina NÃO está online! :(';
+    return false;
+  }
 }
 
-function insertPing($id,$funciona){
-    global $conexao;
-    date_default_timezone_set('America/Sao_Paulo');
-    $sql = "insert into job values($id,NOW(),$funciona)";
-    $conexao->query($sql);
+function getIp(){
+  global $conexao;
+  $sql = 'select * from ip';
+  return $ips = $conexao->query($sql);
 }
 
-function pingDatabase(){
-    $ip = findIp();
-    while($row = $ip->fetch_assoc()) {
-        echo $row['ip'];
-        echo '<br>';
-        echo $row['id'];
-        echo '<br>';
-        $funciona = pingAddress($row['ip']);
-        if($funciona == true){
-            echo "deu bom";
-            insertPing($row["id"],TRUE);
-        }else if($funciona == false){
-            echo "deu ruim";
-            insertPing($row["id"],0);
-        }
-        
+function insertDatabase($id,$work){
+  global $conexao;
+  $sql = "insert into job values($id,NOW(),$work)";
+  $conexao->query($sql);
+}
+
+function doEvery(){
+  $ip = getIp();
+  while($row = $ip->fetch_assoc()) {
+    if(socketServer($row["ip"])==true){
+        insertDatabase($row["id"],1);
+    }else{
+        insertDatabase($row["id"],0);
     }
-    echo "Funcionou";
+  }
 }
-pingDatabase();
-echo "Chegou aqui";
+
+//socketServer('192.168.22.12');
+doEvery();
+
+
 
 
 //Query para verificar funcionamento do roteador na hora, com nome
