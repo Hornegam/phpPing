@@ -13,7 +13,27 @@ if ($conectado) {
   }
 }
 
-function getIp(){
+function pingAddress($ip) {
+  $pingresult = exec("ping -n 3 -w 1 $ip", $outcome, $status);
+  //$status = true;
+  //echo $status;
+   if (1 == $status) {
+       //echo "ping1";
+       //$status = " está funcionando";
+       //echo "O roteador com IP : $ip da escola $nome".$status;
+       echo "ta funcionando";
+       return true;
+   } else {
+       //echo "ping1.errado";
+       //$status = "não está funcionando.";
+       //echo "O roteador com IP $ip da escola $nome ".$status;
+       echo "nao ta funcionando";
+       return false;
+   }
+   
+}
+
+function getIp1(){
   global $conexao;
   $sql = 'select * from ip';
   return $ips = $conexao->query($sql);
@@ -26,9 +46,12 @@ function insertDatabase($id,$work){
 }
 
 function doEvery(){
-  $ip = getIp();
+  $ip = getIp1();
+  //$teste = $ip->fetch_assoc();
+  
   while($row = $ip->fetch_assoc()) {
-    if(socketServer($row["ip"])==true){
+    $out = socketServer($row["ip"]);
+    if($out == true){
         insertDatabase($row["id"],1);
     }else{
         insertDatabase($row["id"],0);
@@ -38,6 +61,7 @@ function doEvery(){
 
 //socketServer('192.168.22.12');
 doEvery();
+
 
 
 

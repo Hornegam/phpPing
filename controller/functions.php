@@ -1,5 +1,6 @@
 <?php
 include '../model/conecta.inc';
+//include '../load/api.php';
 function pingAddress($ip) {
    $pingresult = exec("ping -n 3 -w 1 $ip", $outcome, $status);
    //$status = true;
@@ -47,7 +48,7 @@ function pingUnique(){
 }
 
 function renderizePing($ip){
-    $status = pingAddress($ip);
+    $status = socketServer($ip);
     if($status == true){
         $teste = '<div class="col-md-3 text-align-center pb-1 mt-2">
         <button type="submit" class="btn btn-success fas fa-thumbs-up pb-2"></button>
@@ -70,13 +71,13 @@ function renderizePing2($ip){
     if($status == true){
         $teste = '<div class="col-md-8 text-align-center pb-1 mt-2">
         <button type="submit" class="btn btn-success fas fa-thumbs-up pb-2 pr-4 pl-4"></button>
-        <a href="https://'.$ip.':88"><button type="submit" class="btn btn-warning fas fa-server pb-2 pr-4 pl-4"></button></a>
+        <a href="http://'.$ip.':88"><button type="submit" class="btn btn-warning fas fa-server pb-2 pr-4 pl-4"></button></a>
         </div>';
         return $teste;
         }else if($status == false){
         return $teste = '<div class="col-md-7 text-align-center pr-2 pb-1 mt-2">
         <button type="submit" class="btn btn-danger fas fa-exclamation-circle pb-2 pl-2"></button>
-       <a href="https://'.$ip.':88"><button type="submit" class="btn btn-warning fas fa-server pb-2"></button></a>
+       <a href="http://'.$ip.':88"><button type="submit" class="btn btn-warning fas fa-server pb-2"></button></a>
      
     </div>';
     }
@@ -96,3 +97,49 @@ function getIp($escola){
     return $escolas = $conexao->query($sql);
 
 }
+
+function getLastMinute($escola){
+    global $conexao;
+    $sql = "select escola.nome, ip.ip, ip.id, job.hora, job.funciona from escola inner join ip on (escola.idEscola = ip.idNome) inner join job on (job.idIp = ip.id) WHERE job.hora >= DATE_SUB(NOW(), INTERVAL 10 MINUTE) AND escola.nome like '%$escola%'";
+    return $hour = $conexao->query($sql);
+}
+
+function calculateSchool($escola){
+    $minute = getLastMinute($escola);
+    $teste = $minute->fetch_assoc();
+    $size = sizeof($teste);
+    $funciona = 0;
+    while($row = $minute->fetch_assoc()){
+        if($row['funciona']==0){
+            $funciona = $funciona+1;
+        }    
+    }
+    if($funciona == $size){
+        renderizeButton(2); //2 é quando nada esta pegando
+    }else if($funciona == 0){
+        renderizeButton(0); //0 é quando está tudo pegando
+    }else{
+        renderizeButton(1);//1 é quando alguns porém não todos estão pegando
+    }
+}
+
+function renderizeButton($funciona){
+    if($funciona == 2){
+       echo '<div class="col-sm-3 pl-4">
+                <button type="submit" class="btn btn-danger">RUIM</button>
+            </div>';
+    }else if($funciona == 1){
+        echo '<div class="col-sm-3 pl-4">
+                <button type="submit" class="btn btn-success">BOM</button>
+            </div>';
+    }else if($funciona == 0){
+        echo '<div class="col-sm-3 pl-4">
+        <button type="submit" class="btn btn-warning">MAIS OU MENOS</button>
+        </div>';
+    }else{
+        echo 'Revise seu código';
+    }
+}
+
+
+//select escola.nome, ip.ip, ip.id from escola inner join ip on (escola.idEscola = ip.idNome) inner join job on (job.idIp = ip.id) where escola.nome like 'Adolfina' and job.hora >= DATE_SUB(NOW(), INTERVAL 10 MINUTE)
