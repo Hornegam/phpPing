@@ -47,22 +47,31 @@ function pingUnique(){
 
 }
 
-function renderizePing($ip){
+function renderizePing($ip,$id){
     $status = socketServer($ip);
     if($status == true){
-        $teste = '<div class="col-md-3 text-align-center pb-1 mt-2">
-        <button type="submit" class="btn btn-success fas fa-thumbs-up pb-2"></button>
-        <a href="../pingip.php/?ip='.$ip.'"><button type="submit" class="btn btn-info fas fa-wifi pb-2"></button></a>
-        <a href="http://'.$ip.':88"><button type="submit" href="http://'.$ip.':88" class="btn btn-warning fas fa-server pb-2"></button></a>
-        </div>';
+        $teste = '<td>
+        <i class="fa fa-check-circle  fa-2x ok pd"></i>
+       <a href="http://'.$ip.':88"><i class="fa fa-list fa-2x AR pd"></i></a>
+       <form action="../load/teste.php" method="post">     
+       <button type="submit" name="id" id="id" value="'.$id.'"class="fas fa-chart-bar btn btn-light pt-4">
+       </form>
+       <script>
+        console.log(document.getElementById(id));
+       </script>
+    </td>';
         return $teste;
         }else if($status == false){
-        return $teste = '<div class="col-md-2 text-align-center pr-2 pb-1 mt-2">
-        <button type="submit" class="btn btn-danger fas fa-exclamation-circle pb-2"></button>
-        <a href="../pingip.php/?ip='.$ip.'"><button type="submit" class="btn btn-info fas fa-wifi pb-2"></button><a>
-       <a href="http://'.$ip.':88"><button type="submit" class="btn btn-warning fas fa-server pb-2"></button></a>
-     
-    </div>';
+        return $teste = '<td>
+        <i class="fa fa-exclamation-circle fa-2x td pd"></i>
+       <a href="http://'.$ip.':88"><i class="fa fa-list fa-2x AR pd"></i></a>
+       <form action="../load/teste.php" method="post">     
+       <button type="submit" name="id" id="id" value="'.$id.'"class="fas fa-chart-bar btn btn-light pt-4">
+       </form>
+       <script>
+        console.log(document.getElementById(id));
+       </script>
+    </td>';
     }
 }
 
@@ -93,7 +102,7 @@ function getSchool(){
 
 function getIp($escola){
     global $conexao;
-    $sql = "select escola.nome, ip.ip from escola inner join ip on (escola.idEscola = ip.idNome) where escola.nome like '%$escola%'";
+    $sql = "select escola.nome, ip.ip, ip.id from escola inner join ip on (escola.idEscola = ip.idNome) where escola.nome like '%$escola%'";
     return $escolas = $conexao->query($sql);
 
 }
@@ -106,15 +115,16 @@ function getLastMinute($escola){
 
 function calculateSchool($escola){
     $minute = getLastMinute($escola);
-    $teste = $minute->fetch_assoc();
-    $size = sizeof($teste);
+    $size = 0;
     $funciona = 0;
     while($row = $minute->fetch_assoc()){
         if($row['funciona']==0){
             $funciona = $funciona+1;
-        }    
+        }
+         $size = $size+1;
     }
-    if($funciona == $size){
+
+    if($funciona == ($size-1)){
         renderizeButton(2); //2 é quando nada esta pegando
     }else if($funciona == 0){
         renderizeButton(0); //0 é quando está tudo pegando
@@ -125,17 +135,17 @@ function calculateSchool($escola){
 
 function renderizeButton($funciona){
     if($funciona == 2){
-       echo '<div class="col-sm-3 pl-4">
-                <button type="submit" class="btn btn-danger">RUIM</button>
-            </div>';
+       echo '<td>
+                 <i class="fa fa-exclamation-circle fa-2x red"></i>
+            </td>';
     }else if($funciona == 1){
-        echo '<div class="col-sm-3 pl-4">
-                <button type="submit" class="btn btn-success">BOM</button>
-            </div>';
+        echo '<td>
+        <i class="fa fa-exclamation-triangle fa-2x yl"></i>
+     </td>';
     }else if($funciona == 0){
-        echo '<div class="col-sm-3 pl-4">
-        <button type="submit" class="btn btn-warning">MAIS OU MENOS</button>
-        </div>';
+        echo '<td>
+        <i class="fa fa-check-circle ok fa-2x"></i>
+   </td>';
     }else{
         echo 'Revise seu código';
     }
