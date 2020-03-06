@@ -47,26 +47,38 @@ function pingUnique(){
 
 }
 
-function renderizePing($ip,$id){
+function renderizePing($ip,$id,$nome){
     $status = socketServer($ip);
     if($status == true){
         $teste = '<td>
+        <div>
         <i class="fa fa-check-circle  fa-2x ok pd"></i>
        <a href="http://'.$ip.':88"><i class="fa fa-list fa-2x AR pd"></i></a>
-       <form action="../load/teste.php" method="post">     
+       <form action="grafico.php" method="post" target="_blank">     
        <button type="submit" name="id" id="id" value="'.$id.'"class="fas fa-chart-bar btn btn-light pt-4">
+       <input type="hidden" value="'.$nome.'" id="nome">
+       </form>
+       <form action="grafreal.php" method="post" target="_blank">  
+       <input type="hidden" value="'.$nome.'" id="nome">
+       <button type="submit" name="id" id="id" value="'.$ip.'"class="fas fa-satellite-dish btn btn-light pt-4">
        </form>
        <script>
         console.log(document.getElementById(id));
        </script>
+       </div>
     </td>';
         return $teste;
         }else if($status == false){
         return $teste = '<td>
         <i class="fa fa-exclamation-circle fa-2x td pd"></i>
        <a href="http://'.$ip.':88"><i class="fa fa-list fa-2x AR pd"></i></a>
-       <form action="../load/teste.php" method="post">     
+       <form action="grafico.php" method="post" target="_blank">     
        <button type="submit" name="id" id="id" value="'.$id.'"class="fas fa-chart-bar btn btn-light pt-4">
+       <input type="hidden" value="'.$nome.'" id="nome">
+       </form>
+       <form action="grafreal.php" method="post" target="_blank">     
+       <button type="submit" name="id" id="id" value="'.$ip.'"class="fas fa-satellite-dish btn btn-light pt-4">
+       <input type="hidden" value="'.$nome.'" id="nome">
        </form>
        <script>
         console.log(document.getElementById(id));
@@ -136,8 +148,8 @@ function calculateSchool($escola){
 function renderizeButton($funciona){
     if($funciona == 2){
        echo '<td>
-                 <i class="fa fa-exclamation-circle fa-2x red"></i>
-            </td>';
+       <i class="fa fa-exclamation-circle fa-2x red"></i>
+       </td>';
     }else if($funciona == 1){
         echo '<td>
         <i class="fa fa-exclamation-triangle fa-2x yl"></i>
