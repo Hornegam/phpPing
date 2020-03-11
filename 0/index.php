@@ -21,10 +21,14 @@
     </style>
 </head>
 <body>
-  <div class="ui blue top attached menu">
+  <div class="ui blue menu">
   <a class="item">
     <i class="sidebar icon"></i>
   </a>
+  <div style="width:350vh; margin:0 auto;">
+      <div id="roteadores"></div>
+      <div id="nroteadores"></div>
+  </div>
 </div>
 <div class="ui bottom attached segment">
         <div class="ui blue sidebar blue inverted blue vertical blue menu">
@@ -37,16 +41,34 @@
       <div>  
       <div class="row">
             <div class="column">
-              <form action="#" method="post">
+              <form action="../0" method="post">
                   <input type="hidden" name="teste" value="'.$row['nome'].'"/>
-                  <a class="white item" value="" name="teste" onclick="this.parentNode.submit()"><i class="home icon"></i> Escolas     </a>
+                  <a class="white item" value="" name="teste" onclick="this.parentNode.submit()"><i class="server icon"></i>Roteadores</a>
                        
                   </form>
             </div>
         </div>
         <div class="row">
             <div class="column">
-              <form action="/opcoes" method="post">
+              <form action="../2" method="post">
+                  <input type="hidden" name="teste" value="'.$row['nome'].'"/>
+                  <a class="white item" value="" name="teste" onclick="this.parentNode.submit()"><i class="sitemap icon"></i>Sala de Aula</a>
+                       
+                  </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+              <form action="../3" method="post">
+                  <input type="hidden" name="teste" value="'.$row['nome'].'"/>
+                  <a class="white item" value="" name="teste" onclick="this.parentNode.submit()"><i class="desktop icon"></i>Laboratórios</a>
+                       
+                  </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+              <form action="../1" method="post">
                   <input type="hidden" name="teste" value=""/>
                   <a class="white item" value="" name="teste" onclick="this.parentNode.submit()"><i class="cog icon"></i> Opções     </a>
                        

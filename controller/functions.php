@@ -53,7 +53,7 @@ function renderizePing($ip,$id,$nome){
         $teste = '<td>
         <div>
         <i class="fa fa-check-circle  fa-2x ok pd"></i>
-       <a href="http://'.$ip.':88"><i class="fa fa-list fa-2x AR pd"></i></a>
+       <a href="http://'.$ip.':88" target="_blank"><i class="fa fa-list fa-2x AR pd"></i></a>
        <form action="grafico.php" method="post" target="_blank">     
        <button type="submit" name="id" id="id" value="'.$id.'"class="fas fa-chart-bar btn btn-light pt-4">
        <input type="hidden" value="'.$nome.'" id="nome">
@@ -71,7 +71,7 @@ function renderizePing($ip,$id,$nome){
         }else if($status == false){
         return $teste = '<td>
         <i class="fa fa-exclamation-circle fa-2x td pd"></i>
-       <a href="http://'.$ip.':88"><i class="fa fa-list fa-2x AR pd"></i></a>
+       <a href="http://'.$ip.':88" target="_blank"><i class="fa fa-list fa-2x AR pd"></i></a>
        <form action="grafico.php" method="post" target="_blank">     
        <button type="submit" name="id" id="id" value="'.$id.'"class="fas fa-chart-bar btn btn-light pt-4">
        <input type="hidden" value="'.$nome.'" id="nome">
