@@ -20,7 +20,9 @@ function pegaTudo($nome){
     $funciona = null;
     
     while($row = $escolas->fetch_assoc()) {
-        array_push($that,['ip'=>$row['ip']]);
+        array_push($that,['ip'=>$row['ip'],
+                          'id'=>$row['id']                 
+        ]);
     }
 
     return $that;

@@ -17,7 +17,9 @@ function editSchool($new,$old){
 
 $escolaOld = $_POST['escola'];
 $escolaNew = $_POST['editGroup'];
-
+if(empty($escolaNew) || count(explode(' ', $escolaNew)) > 1){
+    header('location: ../../1');
+}else{
 $escolas = getSchool();
 while($row = $escolas->fetch_assoc()){
     if($row['nome'] == $escolaNew){
@@ -25,6 +27,7 @@ while($row = $escolas->fetch_assoc()){
     }
 }
 editSchool($escolaNew,$escolaOld);
+}
 //addSchool($new);
 
 

@@ -13,6 +13,8 @@
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous"></script>
     <script src="../semantic/semantic.min.js"></script>
+    <link href="../vendor/needim/noty/lib/noty.css" rel="stylesheet">
+    <script src="../vendor/needim/noty/lib/noty.js" type="text/javascript"></script>
     <style>
     .ui.card,
     .ui.cards>.card {
@@ -152,10 +154,11 @@
             <div class="ui input focus">
               <input type="text" id="btn" name="editGroup" placeholder="" required>
             </div>
-            <button class="ui primary button" style="margin-top: 1vh;">
-              Salvar
-            </button>
+                <button class="ui primary button" style="margin-top: 1vh;">Salvar</button>
             </form>
+
+            <button class="ui red button" style="margin-top: 1vh;" onclick="erase()">Apagar</button>
+            
             </div>
         </div>
 
@@ -210,7 +213,6 @@
   </div>
   <div class="content">
         <div class="ui form">
-            <form action="" method="post">
             <div class="field">
             Selecione um grupo de IP
             <select required id="userid">
@@ -238,10 +240,10 @@
                     <td class="right aligned collapsing"><i class='edit icon'></i></td>
                 <tbody>
             </table>
-            <button class="ui primary button">
-              Save
+            <button class="ui primary button" onclick="sub()" id="btnn">
+              Salvar
             </button>
-            </form>
+            
             </div>
         </div>
   </div>
@@ -253,7 +255,15 @@
     </div>
   </div>
 </div>
-
+  <script>
+  new Noty({
+    text: 'NOTY - a dependency-free notification library!',
+    animation: {
+        open: 'animated bounceInRight', // Animate.css class names
+        close: 'animated bounceOutRight' // Animate.css class names
+    }
+}).show();
+</script>
   <script src="js/semanticUi.js"></script>
   <script src="js/editarIp.js"></script>
   <script src="js/editarGrupo.js"></script>
