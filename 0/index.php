@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,8 +28,8 @@
     <i class="sidebar icon"></i>
   </a>
   <div style="width:350vh; margin:0 auto;">
-      <div id="roteadores"></div>
-      <div id="nroteadores"></div>
+      <div id="roteadores" style="width:350vh; margin:0 auto;"></div>
+      <div id="nroteadores" style="width:350vh; margin:0 auto;"></div>
   </div>
 </div>
 <div class="ui bottom attached segment">
@@ -77,10 +79,10 @@
         </div>
         <div class="row">
             <div class="column">
-              <form action=".." method="post">
+              <form action="../login" method="post">
                   <input type="hidden" name="teste" value=""/>
                   <a class="white item" value="" name="teste" onclick="this.parentNode.submit()"><i class="sign-out icon"></i>Sair      </a>
-                  </form>
+              </form>
             </div>
         </div>
           

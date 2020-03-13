@@ -4,9 +4,6 @@ ready = (callback) => {
 }
 ready(() => {  
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 function getData(){
     //var id = document.getElementById('id').value;

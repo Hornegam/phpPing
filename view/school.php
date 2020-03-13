@@ -1,9 +1,4 @@
-<?php 
-if($_POST['teste']==null){
-    header('location: vils.php');
-}
 
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>

@@ -1,3 +1,3 @@
 <?php
-header('location: 0');
+header('location: login');
 
