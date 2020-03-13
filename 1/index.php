@@ -7,14 +7,14 @@
     <title>Monitoramento de Roteadores - SEDUC</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-    <link rel="stylesheet" type="text/css" href="../semantic/semantic.min.css">
+    
     <script
         src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous"></script>
     <script src="../semantic/semantic.min.js"></script>
-    <link href="../vendor/needim/noty/lib/noty.css" rel="stylesheet">
-    <script src="../vendor/needim/noty/lib/noty.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="../semantic/semantic.min.css">
+    <script src="js/notify.min.js" type="text/javascript"></script>
     <style>
     .ui.card,
     .ui.cards>.card {
@@ -145,14 +145,14 @@
               $teste = getSchool();
 
               while($row = $teste->fetch_assoc()) {
-                echo '<option value="'.$row['nome'].'" >'.$row['nome'].'</option>';
+                echo '<option value="'.$row['idEscola'].'" >'.$row['nome'].'</option>';
             }
             ?>
             </select>
             
             <label for="">Digite um novo nome:</label>
             <div class="ui input focus">
-              <input type="text" id="btn" name="editGroup" placeholder="" required>
+              <input type="text" id="btn" name="editGroup" placeholder="Digite um novo nome" required>
             </div>
                 <button class="ui primary button" style="margin-top: 1vh;">Salvar</button>
             </form>
@@ -256,13 +256,7 @@
   </div>
 </div>
   <script>
-  new Noty({
-    text: 'NOTY - a dependency-free notification library!',
-    animation: {
-        open: 'animated bounceInRight', // Animate.css class names
-        close: 'animated bounceOutRight' // Animate.css class names
-    }
-}).show();
+  
 </script>
   <script src="js/semanticUi.js"></script>
   <script src="js/editarIp.js"></script>

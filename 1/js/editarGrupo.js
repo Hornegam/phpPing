@@ -1,4 +1,4 @@
-function erase(){
+/*function erase(){
     var valor = $('#1 option:selected').val()
     console.log(valor)
 
@@ -17,16 +17,16 @@ function erase(){
         console.log("foi alguma coisa")
     })
 }
+*/
 
 $('#1').on('change',function(){
 
     var valor = $('#1 option:selected').val()
-    console.log('value '+$('#userid option:selected').val())
-    console.log('text '+$('#userid option:selected').text())
-    console.log('index '+$('#userid option:selected').index())
-
+    console.log('value '+$('#1 option:selected').val())
+    console.log('text '+$('#1 option:selected').text())
+    console.log('index '+$('#1 option:selected').index())
+    console.log(valor)
     var btn = document.getElementById("btn");
-    btn.setAttribute('placeholder',valor);  
 
 
 })

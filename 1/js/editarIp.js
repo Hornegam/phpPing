@@ -26,6 +26,7 @@ function sub(){
           .then(function(response){
             response.json().then(function(data){
               console.table(data)
+              $.notify("IP alterado com sucesso !","success");
             })
           })
           var cell2 = document.getElementById('btnn')
@@ -49,9 +50,14 @@ function er(o,id) {
 
   fetch(u,myi)
   .then(function(response){
-    console.log("chegou aqui")
+    console.log("chegou aqui 2")
     var p=o.parentNode.parentNode;
       p.parentNode.removeChild(p);
+    
+      $.notify("IP deletado com sucesso","success");
+  })
+  .catch(function(e){
+    console.error(e)
   })
 
   

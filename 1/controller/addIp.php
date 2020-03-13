@@ -11,7 +11,7 @@ function addIp($ip,$id){
     global $conexao;
     $sql = "insert into ip(ip,idNome) values('$ip','$id')";
     $conexao->query($sql);
-    header('location: ../../0');
+    header('location: ../../1');
 }
 
 $escola = $_POST['escola'];

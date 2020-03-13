@@ -10,23 +10,18 @@ function getSchool(){
 
 function editSchool($new,$old){
     global $conexao;
-    $sql = "update escola set nome = '$new' WHERE nome like '%$old%'";
+    $sql = "update escola set nome = '$new' WHERE idEscola = $old";
     $conexao->query($sql);
     header('location: ../../0');
 }
 
 $escolaOld = $_POST['escola'];
 $escolaNew = $_POST['editGroup'];
-if(empty($escolaNew) || count(explode(' ', $escolaNew)) > 1){
+if(empty($escolaNew)){
     header('location: ../../1');
+    echo ($escolaNew." e ".$escolaOld);
 }else{
-$escolas = getSchool();
-while($row = $escolas->fetch_assoc()){
-    if($row['nome'] == $escolaNew){
-        header('location: ../1');
-    }
-}
-editSchool($escolaNew,$escolaOld);
+    editSchool($escolaNew,$escolaOld);
 }
 //addSchool($new);
 

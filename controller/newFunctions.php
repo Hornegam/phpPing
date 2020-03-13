@@ -3,7 +3,7 @@ include '../model/conecta.inc';
 
 function getSchool(){
     global $conexao;
-    $sql = "select distinct(nome) from escola order by nome";
+    $sql = "select distinct(nome), idEscola from escola order by nome";
     return $escolas = $conexao->query($sql);
 
 }
