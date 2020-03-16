@@ -53,16 +53,7 @@
             <div class="column">
               <form action="../2" method="post">
                   <input type="hidden" name="teste" value="'.$row['nome'].'"/>
-                  <a class="white item" value="" name="teste" onclick="this.parentNode.submit()"><i class="sitemap icon"></i>Sala de Aula</a>
-                       
-                  </form>
-            </div>
-        </div>
-        <div class="row">
-            <div class="column">
-              <form action="../3" method="post">
-                  <input type="hidden" name="teste" value="'.$row['nome'].'"/>
-                  <a class="white item" value="" name="teste" onclick="this.parentNode.submit()"><i class="desktop icon"></i>Laboratórios</a>
+                  <a class="white item" value="" name="teste" onclick="this.parentNode.submit()"><i class="sitemap icon"></i>Computadores</a>
                        
                   </form>
             </div>

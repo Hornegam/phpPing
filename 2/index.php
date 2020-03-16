@@ -54,16 +54,7 @@
             <div class="column">
               <form action="../2" method="post">
                   <input type="hidden" name="teste" value="'.$row['nome'].'"/>
-                  <a class="white item" value="" name="teste" onclick="this.parentNode.submit()"><i class="sitemap icon"></i>Sala de Aula</a>
-                       
-                  </form>
-            </div>
-        </div>
-        <div class="row">
-            <div class="column">
-              <form action="../3" method="post">
-                  <input type="hidden" name="teste" value="'.$row['nome'].'"/>
-                  <a class="white item" value="" name="teste" onclick="this.parentNode.submit()"><i class="desktop icon"></i>Laboratórios</a>
+                  <a class="white item" value="" name="teste" onclick="this.parentNode.submit()"><i class="sitemap icon"></i>Computadores</a>
                        
                   </form>
             </div>
@@ -91,243 +82,98 @@
   
 </div>
 
-<div class="ui three column centered grid" style="padding-left: 10px; padding-right: 10px;">
-    <div class="six column centered row" >
-    <div class="ui modal" id="desc">
-    <div class="header" id="head">Adolfina Leonor</div>
-                                        <div class="content"><div class="ui relaxed divided list">
-                            <div class="item">
-                                <i class="large red sync middle aligned icon" id=sala name="sala"></i>
-                                <div class="content">
-                                <a class="header">Salas de Aula</a>
-                                <div class="description">Updated 10 mins ago</div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <i class="large red sync middle aligned icon" id="lab" name="lab"></i>
-                                <div class="content">
-                                <a class="header">Laboratório de Informática</a>
-                                <div class="description">Updated 22 mins ago</div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <i class="large red sync middle aligned icon" id="outros" name="outros"></i>
-                                <div class="content">
-                                <a class="header">Outros Computadores</a>
-                                <div class="description">Updated 34 mins ago</div>
-                                </div>
-                            </div>
-                            </div></div>
-    </div>
-    <div class="ui primary test button" onclick="cl(this.name)" name="Adolfina">Adolfina
-        <i class="right floated red sync icon" id="156"></i>
-    </div>
-    <div class="ui primary test button" onclick="cl(this.name)" name="Ujio">Teste
-        <i class="right floated red sync icon" id="178"></i>
-    </div>
-    <div class="ui primary test button" onclick="cl(this.name)" name="Corona">Poxa
-        <i class="right floated red sync icon" id="195"></i>
-    </div>
-    
+<!-- Dimmer para dar blur na tela com loading-->
 
+
+<!-- Dimmer encerrado -->
+
+
+<div class="ui grid">
+  <div class="row">
+    <div class="three wide column">
+
+      <img>
+    </div>
+    <div class="ten wide column" style="margin-top: 5vh; margin-left: 20vh;">
+    <div class="ui styled accordion">
+
+<!--Seção de Editar IP -->
+  <div class="title">
+    <i class="edit icon"></i>
+    Verificar Computadores
+  </div>
+  <div class="content">
+        <div class="ui form">
+            <div class="field">
+            Selecione um grupo de IP
+            <select required id="userid">
+            <option value="">Selecione um grupo</option>
+            <?php
+                include '../controller/newfunctions.php';
+                include '../model/conecta.inc';
+                $escolas = getSchool();
+
+                while($row = $escolas->fetch_assoc()) {
+                    echo '<option value="'.$row['idEscola'].'">'.$row['nome'].'</option>';
+                }
+            ?>
+            </select>
+            <div class="ui page dimmer" id="vei">
+                <div class="content">
+                <div class="ui text loader">Loading</div>
+                 </div>
+            </div>
+            <table class="ui celled striped table hidden" id="teste">
+            <thead>
+                <tr><th colspan="1">
+                    Status
+                    </th>
+                    <th colspan="1">
+                    Patrimonio
+                    </th>
+                    <th colspan="1">
+                    IP
+                    </th>
+                    <th colspan="1">
+                    Tipo
+                    </th>
+                    <th colspan="1">
+                    Local
+                    </th>
+                </tr></thead>
+                <tbody id='table'>
+                    <td class="right aligned collapsing">
+                        <i class="spinner icon"></i> <p class=></p>
+                    </td>
+                    <td contenteditable="true">Patrimonio</td>
+                    <td contenteditable="true">IP</td>
+                    <td contenteditable="true">Tipo</td>
+                    <td>Local</td>
+                <tbody>
+            </table>
+
+            </div>
+        </div>
+  </div>
+<!--Fim Seção de Editar IP -->
 </div>
+    </div>
+    <div class="three wide column">
+      <img>
+    </div>
+  </div>
 </div>
+
+
+
   <!--    
   <script src="../view/js/apiBolinhaJs.js"></script>
-            -->            
-  <script>
-    $('.ui.sidebar').sidebar({
-    context: $('.bottom.segment')
-  })
-  .sidebar('attach events', '.menu .item');
-  </script>
-  <script>
-      function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-    var date = []
-
-    function getData(){
-        ready = (callback) => {
-            if (document.readyState != "loading") callback();
-            else document.addEventListener("DOMContentLoaded", callback);
-        }
-        ready(() => {
-            let url = "controller/api/apiBolinhaBtn.php";
-            let myinit = {
-                method : 'POST',
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json"
-                }      
-            }
-            fetch(url,myinit)
-            .then(function(response){
-                response.json().then(function(data){
-                    console.table(data)
-                    
-                    var tamanho = data.length
-                //console.log(tamanho)
-                var funciona = 0
-                var nfunciona = 0
-                data.forEach(function(data){
-                    if(data.funciona == data.tamanho){
-                        var nome = "#"+data.escola
-                        $(function() {
-                            $(nome).removeClass('right floated red sync icon').addClass('right floated green circle icon');
-                        });
-                        //console.log("Tudo funciona na escola : "+data.escola)
-                        funciona = data.funciona+funciona
-                    }else if(data.funciona > 0 && data.funciona < data.tamanho){
-                        var nome = "#"+data.escola
-                        $(function() {
-                            $(nome).removeClass('right floated red sync icon').addClass('right floated yellow circle icon');
-                        });
-                        //console.log("Ta mais ou menos na escola : "+data.escola)
-                        funciona = data.funciona+funciona
-                        nfunciona = nfunciona+(data.tamanho-data.funciona)
-                    }else if(data.funciona == 0){
-                        var nome = "#"+data.escola
-                        $(function() {
-                            $(nome).removeClass('right floated red sync icon').addClass('right floated red circle icon');
-                        });
-                        //console.log("Não ta pegando na escola : "+data.escola)
-                        nfunciona = nfunciona+data.tamanho
-                    }
-                })
-
-                    date = data     
-                    console.log("Estão ligados ou estão sem internet - "+funciona)
-                    console.log("Não estão ligados ou estão sem internet - "+nfunciona)
-                })
-            })
-
-
-
-
-        })
-
-
-
-    }
-    getData()
-    setInterval(getData,30000)
-
-    function cl(id){
-                            $('.ui.modal')
-                            .modal('setting', 'transition', 'horizontal flip')
-                            .modal('show')
-                            
-                            var funcionaLab = 0
-                            var funcionaSala = 0
-                            var funcionaOutro = 0
-                            var tamanho = 0
-                            var lab = 0
-                            var sala = 0
-                            var outros = 0
-                            for(var i =0;i<date.length;i++){
-                                
-                                if(date.escola == id){
-                                for(var j = 0;j<date[i].local.length;j++){
-                                    if(date[i].local[j].local == "LAB"){
-                                        //console.log("LAB1")
-                                        if(date[i].local[j].funfa == "1"){
-                                            funcionaLab = funcionaLab+1
-                                            //console.log("LAB2")
-                                            lab = lab+1
-                                        }else{
-                                            lab = lab+1
-                                            //console.log("LAB3")
-                                        }
-                                    }else if(date[i].local[j].local == "SALA DE AULA"){
-                                        //console.log("SALA1")
-                                        if(date[i].local[j].funfa == "1"){
-                                            funcionaSala = funcionaSala+1
-                                            //console.log("SALA2")
-                                            sala = sala+1
-                                        }else{
-                                            //console.log("SALA3")
-                                            sala = sala+1
-                                        }
-                                    }else{
-                                        if(date[i].local[j].funfa == "1"){
-                                            //console.log("OUTROS")
-                                            funcionaOutro = funcionaOutro+1
-                                            outros = outros+1
-                                        }else{
-                                            //console.log("OUTROS1")
-                                            outros = outros+1
-                                        }
-                                        
-                                    }
-                                    
-                                }
-                                
-                            }
-                            
-                            }
-                            console.log("Funcionando - "+funcionaLab+" - Totais no lab "+lab)
-                            console.log("Funcionando - "+funcionaSala+" - Totais na sala "+sala)
-                            console.log("Funcionando - "+funcionaOutro+" - Totais em outros Lugares "+outros)
-                            console.log(id)
-                            if(funcionaLab == lab){
-                                var nome = "#lab"
-                                $(function() {
-                                    $("#lab").removeClass('large red sync middle aligned icon').addClass('large green circle middle aligned icon');
-                                });
-                            }else if(funcionaLab == 0){
-                                var nome = "#lab"
-                                $(function() {
-                                    $("#lab").removeClass('large red sync middle aligned icon').addClass('large red circle middle aligned icon');
-                                });
-                            }else{
-                                var nome = "#lab"
-                                $(function() {
-                                    $("#lab").removeClass('large red sync middle aligned icon').addClass('large yellow circle middle aligned icon');
-                                });
-                            }
-
-                            if(funcionaSala == sala){
-                                var nome = "#sala"
-                                $(function() {
-                                    $("#sala").removeClass('large red sync middle aligned icon').addClass('large green circle middle aligned icon');
-                                });
-                            }else if(funcionaSala == 0){
-                                var nome = "#sala"
-                                $(function() {
-                                    $("#sala").removeClass('large red sync middle aligned icon').addClass('large red circle middle aligned icon');
-                                });
-                            }else{
-                                var nome = "#sala"
-                                $(function() {
-                                    $("#sala").removeClass('large red sync middle aligned icon').addClass('large yellow circle middle aligned icon');
-                                });
-                            }
-
-                            if(funcionaOutro == outros){
-                                var nome = "#outro"
-                                $(function() {
-                                    $("#outros").removeClass('large red sync middle aligned icon').addClass('large green circle middle aligned icon');
-                                });
-                            }else if(funcionaOutro == 0){
-                                var nome = "#outro"
-                                $(function() {
-                                    $("#outros").removeClass('large red sync middle aligned icon').addClass('large red circle middle aligned icon');
-                                });
-                            }else{
-                                var nome = "#outro"
-                                $(function() {
-                                    $("#outros").removeClass('large red sync middle aligned icon').addClass('large yellow circle middle aligned icon');
-                                });
-                            }
-
-
-                            //$('#desc').html();
-    }
-
-
-
+            -->    
+  <script src="controller/js/verComputador.js"></script>
+  <script src="controller/js/semanticUi.js"></script>   
+  <!--      
+  <script src="controller/js/bolinha.js">
+    -->
   </script>
 </body>
 </html>
