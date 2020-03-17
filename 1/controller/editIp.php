@@ -24,15 +24,18 @@ function tratar(){
             if(setIp($id['ip'][$i],$ids)){
                 array_push($certo,['updated'=> 1,
                                    'id'=>$ids
+                                   
                 ]);
             }else{
                 array_push($certo,['updated'=> 0,
                 'id'=>$ids
+                
                 ]);  
             }
         }else{
             array_push($certo,['updated'=> 0,
                 'id'=>$ids
+                
             ]); 
         }
     }

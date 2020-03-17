@@ -107,8 +107,12 @@
                                   </a>
                                   <i class="right floated red sync icon" id="'.$nome1.'"></i>
                           </form>
+                          
+                      
+                    
                        </div>
                     </div>
+                    
                 </div>
             </div>  
          </div>';

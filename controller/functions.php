@@ -116,7 +116,7 @@ function getSchool(){
 
 function getIp($escola){
     global $conexao;
-    $sql = "select escola.nome, ip.ip, ip.id from escola inner join ip on (escola.idEscola = ip.idNome) where escola.nome like '%$escola%'";
+    $sql = "select escola.nome, ip.ip, ip.id from escola inner join ip on (escola.idEscola = ip.idNome) where escola.nome like '%$escola%' ORDER BY INET_ATON(ip.ip)";
     return $escolas = $conexao->query($sql);
 
 }

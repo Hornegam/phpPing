@@ -68,8 +68,10 @@ $('#userid').on('change',function(){
     console.log('value '+$('#userid option:selected').val())
     console.log('text '+$('#userid option:selected').text())
     console.log('index '+$('#userid option:selected').index())
+    //console.log($('#tipoSelectEditar option:selected').val() )
 
-    var nome = $('#userid option:selected').val()
+    var tipo = $('#tipoSelectEditar option:selected').val() 
+    var nome = $('#userid option:selected').val() 
 
     var url = '../controller/apis/apiEditarIp.php'
     var myinit = {
@@ -78,7 +80,9 @@ $('#userid').on('change',function(){
       "Accept": "application/json",
       "Content-Type": "application/json"
           },
-      body: JSON.stringify({'id': nome})      
+      body: JSON.stringify({'id': nome,
+                            'tipo': tipo
+      })      
   }
 
   
@@ -88,26 +92,46 @@ $('#userid').on('change',function(){
   .then(function(response){
           console.log("chegou aqui")
           response.json().then(function(data){
-              console.log(data)
-
-              $("#table tr").remove(); 
+              console.table(data)
+            if(data.tipo==1){
+              $("#tabela tr").remove();
+              $("#tabela td").remove();  
               var tamanho = data.length
               var reverse = data.reverse
               for(var i=0;i<tamanho;i++){
-                var table = document.getElementById("table");
-                var row = table.insertRow(0);
+                var table = document.getElementById("tabela");
+                var row = table.insertRow(-1);
                 var cell1 = row.insertCell(0);
                 var cell2 = row.insertCell(1);
                 var cell3 = row.insertCell(2);
-                cell1.innerHTML = "<i class='laptop icon'>"+data[i].id+"</i> ";
+                cell1.innerHTML = "<i class=''>"+data[i].id+"</i> ";
                 cell2.innerHTML = '<p id="'+data[i].ip+'">'+data[i].ip+'</p>';
                 cell2.setAttribute('contentEditable', 'true');
                 cell2.classList.add('ipTr');
                 cell1.classList.add('idTr');
                 cell3.innerHTML = '<div onclick="er(this,'+data[i].id+')"><i class="ui red trash icon"></i></div>'
               }
-
-              
+            }else{
+              $("#tabela tr").remove();
+              $("#tabela td").remove(); 
+              var tamanho = data.length
+              var reverse = data.reverse
+              for(var i=0;i<tamanho;i++){
+                var table = document.getElementById("tabela");
+                var row = table.insertRow(-1);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                var cell4 = row.insertCell(3);
+                cell1.innerHTML = "<i class=''>"+data[i].patrimonio+"</i> ";
+                cell2.innerHTML = '<p id="'+data[i].ip+'">'+data[i].ip+'</p>';
+                cell2.setAttribute('contentEditable', 'true');
+                cell2.classList.add('ipTr');
+                cell1.classList.add('idTr');
+                cell3.innerHTML = '<p id="'+data[i].ip+'">'+data[i].local+'</p>';
+                cell4.innerHTML = '<div onclick="er(this,'+data[i].id+')"><i class="ui red trash icon"></i></div>'
+            }
+          }   
               
 
               

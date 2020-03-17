@@ -145,10 +145,10 @@
                     <td class="right aligned collapsing">
                         <i class="spinner icon"></i> <p class=></p>
                     </td>
-                    <td contenteditable="true">Patrimonio</td>
-                    <td contenteditable="true">IP</td>
-                    <td contenteditable="true">Tipo</td>
-                    <td>Local</td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td contenteditable="true"></td>
+                    <td></td>
                 <tbody>
             </table>
 

@@ -170,34 +170,76 @@
   <div class="content">
   <div class="ui form">
   <div class="field">
-  <form action="controller/addIp.php" method="POST" id="myForm">
+  
   Selecione um grupo de IP
-    <select name="escola" required>
+    <select name="escola" id="escola" required>
       <option value="">Selecione um grupo</option>
       <?php
         $escolas = getSchool();
 
         while($row = $escolas->fetch_assoc()) {
-            echo '<option value="'.$row['nome'].'">'.$row['nome'].'</option>';
+            echo '<option value="'.$row['idEscola'].'">'.$row['nome'].'</option>';
         }
       ?>
     </select>
-    <div class="field" id="fie">
-      <label>Digite o IP</label>
-      <input placeholder="Digite o IP" type="text" name="ip" tabindex="-1" required>
-    </div>
-    <button type="submit" class="ui primary button">
+    <label>Digite o tipo do grupo</label>
+    <select name="tipo" id="tipoSelect" required>
+      <option value="">Selecione um tipo grupo</option>
+      <option value="0">Computadores</option>
+      <option value="1">Roteadores</option>
+    </select>
+    <table class="ui celled striped table hidden" id="teste">
+            <thead>
+                <tr>
+                    <th colspan="1">
+                    Patrimonio
+                    </th>
+                    <th colspan="1">
+                    IP
+                    </th>
+                    <th colspan="1">
+                    Tipo
+                    </th>
+                    <th colspan="1">
+                    Local
+                    </th>
+                    <th colspan="1">
+                    Editar
+                    </th>
+                </tr></thead>
+                <tbody id='table' required>
+                    
+                    <td contenteditable="true" class="patrimonioTr"></td>
+                    <td contenteditable="true" class="ippTr"></td>
+                    <td contenteditable="true" class="tipoTr"></td>
+                    <td contenteditable="true" class="localTr"></td>
+                    <td class="center aligned collapsing">
+                    <div>
+                      <div onclick="addRow()">
+                        <i class="green plus square icon"></i>
+                      </div>
+                      <div onclick="era(this)">
+                        <i class="red trash icon"></i>
+                      </div>
+                    </div>
+                    </td>
+                <tbody>
+            </table>
+    <button type="submit" class="ui primary button" onclick="submi()">
         Salvar
     </button>
     <button class="ui button" type="reset">
         Descartar
     </button>
-    </form>
+    
     
   </div>
 </div>  
 </div>
 <!--Fim Seção de Adicionar IP -->
+
+
+
 
 <!--Seção de Editar IP -->
   <div class="title">
@@ -207,6 +249,12 @@
   <div class="content">
         <div class="ui form">
             <div class="field">
+            <label>Digite o tipo do grupo</label>
+            <select name="tipo" id="tipoSelectEditar" required>
+              <option value="">Selecione um tipo grupo</option>
+              <option value="0">Computadores</option>
+              <option value="1">Roteadores</option>
+            </select>
             Selecione um grupo de IP
             <select required id="userid">
             <option value="">Selecione um grupo</option>
@@ -215,11 +263,11 @@
                 $escolas = getSchool();
 
                 while($row = $escolas->fetch_assoc()) {
-                    echo '<option value="'.$row['nome'].'">'.$row['nome'].'</option>';
+                    echo '<option value="'.$row['idEscola'].'">'.$row['nome'].'</option>';
                 }
             ?>
             </select>
-            <table class="ui celled striped table hidden">
+            <table class="ui celled striped table hidden" id="tabela">
             <thead>
                 <tr><th colspan="3">
                     IP's
@@ -248,9 +296,7 @@
     </div>
   </div>
 </div>
-  <script>
-  
-</script>
+  <script src="js/addIp.js"></script>
   <script src="js/semanticUi.js"></script>
   <script src="js/editarIp.js"></script>
   <script src="js/editarGrupo.js"></script>
