@@ -1,4 +1,10 @@
 <?php
+session_start();
+if(!isset($_SESSION['nome'])){
+    header('location: ../login');
+};
+
+
 include '../../model/conecta.inc';
 
 function getSchool(){
@@ -38,8 +44,8 @@ function getComp($id){
     while($row = $escolas->fetch_assoc()) {
         array_push($that,['ip'=>$row['ip'],
                           'patrimonio'=>$row['patrimonio'],
-                          'local'=>$row['local']
-                                     
+                          'local'=>$row['local'],
+                          'id'=>$row['idComp']                     
         ]);
     }
     return $that;

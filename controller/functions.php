@@ -1,4 +1,9 @@
 <?php
+session_start();
+if(!isset($_SESSION['nome'])){
+    header('location: ../login');
+};
+
 include '../model/conecta.inc';
 //include '../load/api.php';
 function pingAddress($ip) {

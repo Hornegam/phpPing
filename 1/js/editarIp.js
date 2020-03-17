@@ -34,7 +34,7 @@ function sub(){
           cell2.classList.add("ui","green","button");
 }
 
-function er(o,id) {
+function er(o,id,tipo) {
   //no clue what to put here?
 
   console.log(id)
@@ -45,7 +45,9 @@ function er(o,id) {
     "Accept": "application/json",
     "Content-Type": "application/json"
         },
-    body: JSON.stringify({'id': id})      
+    body: JSON.stringify({'id': id,
+                          'tipo': tipo
+    })      
 }
 
   fetch(u,myi)
@@ -93,30 +95,31 @@ $('#userid').on('change',function(){
           console.log("chegou aqui")
           response.json().then(function(data){
               console.table(data)
-            if(data.tipo==1){
+              var s = data.length-1
+            if(data[s].tipo==1){
               $("#tabela tr").remove();
               $("#tabela td").remove();  
               var tamanho = data.length
               var reverse = data.reverse
-              for(var i=0;i<tamanho;i++){
+              for(var i=0;i<(tamanho-1);i++){
                 var table = document.getElementById("tabela");
                 var row = table.insertRow(-1);
                 var cell1 = row.insertCell(0);
                 var cell2 = row.insertCell(1);
                 var cell3 = row.insertCell(2);
-                cell1.innerHTML = "<i class=''>"+data[i].id+"</i> ";
+                cell1.innerHTML = "<i class='computer icon'>"+data[i].id+"</i> ";
                 cell2.innerHTML = '<p id="'+data[i].ip+'">'+data[i].ip+'</p>';
                 cell2.setAttribute('contentEditable', 'true');
                 cell2.classList.add('ipTr');
                 cell1.classList.add('idTr');
-                cell3.innerHTML = '<div onclick="er(this,'+data[i].id+')"><i class="ui red trash icon"></i></div>'
+                cell3.innerHTML = '<div onclick="er(this,'+data[i].id+','+data[s].tipo+')"><i class="ui red trash icon"></i></div>'
               }
-            }else{
+            }else if(data[s].tipo == 0){
               $("#tabela tr").remove();
               $("#tabela td").remove(); 
               var tamanho = data.length
               var reverse = data.reverse
-              for(var i=0;i<tamanho;i++){
+              for(var i=0;i<(tamanho-1);i++){
                 var table = document.getElementById("tabela");
                 var row = table.insertRow(-1);
                 var cell1 = row.insertCell(0);
@@ -129,7 +132,7 @@ $('#userid').on('change',function(){
                 cell2.classList.add('ipTr');
                 cell1.classList.add('idTr');
                 cell3.innerHTML = '<p id="'+data[i].ip+'">'+data[i].local+'</p>';
-                cell4.innerHTML = '<div onclick="er(this,'+data[i].id+')"><i class="ui red trash icon"></i></div>'
+                cell4.innerHTML = '<div onclick="er(this,'+data[i].id+','+data[s].tipo+')"><i class="ui red trash icon"></i></div>'
             }
           }   
               

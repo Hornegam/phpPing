@@ -1,5 +1,8 @@
 <?php
 include '../model/conecta.inc';
+if(!isset($_SESSION['nome'])){
+    header('location: ../login');
+};
 
 function getSchool(){
     global $conexao;

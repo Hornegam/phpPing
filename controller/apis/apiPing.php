@@ -1,4 +1,9 @@
 <?php
+session_start();
+if(!isset($_SESSION['nome'])){
+    header('location: ../login');
+};
+
 function socketServer($ip){
     $conectado = @ fsockopen($ip.':88', 135, $numeroDoErro, $stringDoErro, 5); // Este último é o timeout, em segundos
     

@@ -22,7 +22,7 @@ function verifica($user1,$pass1){
     }
 
     if($go == true){
-        $sql = "select * from users where rg = '".$user1."'";
+        $sql = "select * from users where usuario = '".$user1."'";
         $consultas = $conexao->query($sql);
         //echo ("40");
         foreach($consultas as $consulta){
@@ -31,12 +31,9 @@ function verifica($user1,$pass1){
             $_SESSION['id'] = $consulta['idUser'];
         }
         //echo ("10");
-        header('location: ../0');
+        echo $_SESSION['nome'];
+        header('location: ../0/');
 
-    }else{
-        $_SESSION["nome"] = null;
-        //echo ("20");
-        header('location: ../login');
     }
 
 

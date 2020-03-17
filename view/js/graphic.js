@@ -1,14 +1,4 @@
         var chart= null;
-
-        function last7Days(d) {
-            d = +(d || new Date()), days = [], i=7;
-            while (i--) {
-              days.push(formatUSDate(new Date(d-=8.64e7)));
-            }
-            return days;
-          }
-          var data = new Date();
-        console.log(last7Days(data.getDate()))
         
         function grafico(hora,data){
             if(chart != null){

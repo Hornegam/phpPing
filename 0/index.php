@@ -1,3 +1,10 @@
+<?php 
+    
+    session_start();
+    if(!isset($_SESSION['nome'])){
+        header('location: ../login');
+    };
+?>
 
 
 <!DOCTYPE html>
@@ -70,7 +77,7 @@
         </div>
         <div class="row">
             <div class="column">
-              <form action="../login" method="post">
+              <form action="../controller/logout.php" method="post">
                   <input type="hidden" name="teste" value=""/>
                   <a class="white item" value="" name="teste" onclick="this.parentNode.submit()"><i class="sign-out icon"></i>Sair      </a>
               </form>

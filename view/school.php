@@ -1,4 +1,10 @@
-
+<?php 
+    
+    session_start();
+    if(!isset($_SESSION['nome'])){
+        header('location: ../login');
+    };
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
