@@ -22,6 +22,7 @@
         <a class="hm" href=".."><i class="fa fa-home fa-2x"></i></a>
         <div class="ui clearing divider"></div>
         <center><h4><?= $_POST['id']?></h4></center>
+        <center><h4><?= $_POST['nomea']?></h4></center>
 
         <h4 class="ui horizontal divider header">
             <i class="bar chart icon"></i>

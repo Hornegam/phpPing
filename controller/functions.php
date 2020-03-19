@@ -1,7 +1,6 @@
 <?php
-session_start();
 if(!isset($_SESSION['nome'])){
-    header('location: ../login');
+    //header('location: ../login');
 };
 
 include '../model/conecta.inc';
@@ -61,11 +60,11 @@ function renderizePing($ip,$id,$nome){
        <a href="http://'.$ip.':88" target="_blank"><i class="fa fa-list fa-2x AR pd"></i></a>
        <form action="grafico.php" method="post" target="_blank">     
        <button type="submit" name="id" id="id" value="'.$id.'"class="fas fa-chart-bar btn btn-light pt-4">
-       <input type="hidden" value="'.$nome.'" id="nome">
-       <input type="hidden" value="'.$ip.'" id="ip">
+       <input type="hidden" value="'.$nome.'" id="nome" name="nome">
+       <input type="hidden" value="'.$ip.'" id="ip" name="ip">
        </form>
        <form action="grafreal.php" method="post" target="_blank">  
-       <input type="hidden" value="'.$nome.'" id="nome">
+       <input type="hidden" value="'.$nome.'" id="nome" name="nomea">
        <button type="submit" name="id" id="id" value="'.$ip.'"class="fas fa-satellite-dish btn btn-light pt-4">
        </form>
        <script>
@@ -85,7 +84,7 @@ function renderizePing($ip,$id,$nome){
        </form>
        <form action="grafreal.php" method="post" target="_blank">     
        <button type="submit" name="id" id="id" value="'.$ip.'"class="fas fa-satellite-dish btn btn-light pt-4">
-       <input type="hidden" value="'.$nome.'" id="nome">
+       <input type="hidden" id="nomea" name="nomea" value="'.$nome.'" >
        </form>
        <script>
         console.log(document.getElementById(id));

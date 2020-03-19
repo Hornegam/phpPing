@@ -19,12 +19,12 @@
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous"></script>
     <script src="../semantic/semantic.min.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
     <style>
     .ui.card,
     .ui.cards>.card {
     background-color: #2185d0;
     }
-
     </style>
 </head>
 <body>
@@ -174,6 +174,17 @@
   <!--    
   <script src="../view/js/apiBolinhaJs.js"></script>
             -->    
+  <script>
+    let tid = "#usersTable";
+    let headers = document.querySelectorAll(tid + " th");
+
+    // Sort the table element when clicking on the table headers
+    headers.forEach(function(element, i) {
+      element.addEventListener("click", function() {
+    w3.sortHTML(tid, ".item", "td:nth-child(" + (i + 1) + ")");
+  });
+});
+  </script>
   <script src="controller/js/verComputador.js"></script>
   <script src="controller/js/semanticUi.js"></script>   
   <!--      

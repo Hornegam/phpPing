@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +20,7 @@
     <div class="ui segment">
         <h2 class="ui right floated header">Gráfico de Monitoramento</h2>
         <center><h4><?= $_POST['nome']?></h4></center>
+        <center><h4><?= $_POST['ip']?></h4></center>
         <div class="ui clearing divider"></div>
         <h4 class="ui horizontal divider header">
             <i class="bar chart icon"></i>
