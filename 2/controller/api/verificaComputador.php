@@ -56,7 +56,7 @@ function tratar(){
     //$data = hora();
     //$sla = pegaTudo();
     echo json_encode($ip);
-    header('Content-Type: application/json');
+    //header('Content-Type: application/json');
     //header('location: teste.php');
     
 }

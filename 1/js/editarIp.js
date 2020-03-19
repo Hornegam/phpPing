@@ -1,13 +1,17 @@
 function sub(){
   var ipmudado = []
   var idmudado = []
+  var tipo = []
             $('.ipTr').each(function(e){
               ipmudado.push($(this).text())
             })
             $('.idTr').each(function(e){
               idmudado.push($(this).text())
             })
-
+            $('.tipoTr').each(function(e){
+              tipo.push($(this).val())
+            })
+            console.table(tipo)
             console.table(ipmudado)
             console.table(idmudado)
             var ur = 'controller/editIp.php'
@@ -57,6 +61,7 @@ function er(o,id,tipo) {
       p.parentNode.removeChild(p);
     
       $.notify("IP deletado com sucesso","success");
+      window.location.href="#"
   })
   .catch(function(e){
     console.error(e)
@@ -131,7 +136,8 @@ $('#userid').on('change',function(){
                 cell2.setAttribute('contentEditable', 'true');
                 cell2.classList.add('ipTr');
                 cell1.classList.add('idTr');
-                cell3.innerHTML = '<p id="'+data[i].ip+'">'+data[i].local+'</p>';
+                cell3.innerHTML = '<p id="'+data[s].tipo+'">'+data[i].local+'</p>';
+                cell3.classList.add('tipoTr');
                 cell4.innerHTML = '<div onclick="er(this,'+data[i].id+','+data[s].tipo+')"><i class="ui red trash icon"></i></div>'
             }
           }   
